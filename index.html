@@ -9,7 +9,48 @@
     <link rel="icon" type="jpg" href="favicon.jpg" />
     <link rel="stylesheet" type="text/css" href="style.css" />
 	
-	<style type="text/css">
+    <script type="text/javascript">
+        //<![CDATA[
+        // 1. Mengubah tajuk halaman secara dinamik menggunakan JS
+        document.title = "Tropika Harvest Berhad | Premium Malaysian Fruits";
+
+        // 2. Fungsi untuk mengemas kini atau mencipta meta tag secara dinamik
+        function updateMetaTag(name, content) {
+            var meta = document.querySelector("meta[name='" + name + "']");
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.name = name;
+                document.getElementsByTagName('head')[0].appendChild(meta);
+            }
+            meta.content = content;
+        }
+
+        // 3. Fungsi untuk Open Graph (SEO Media Sosial seperti WhatsApp/Facebook)
+        function setOgTag(property, content) {
+            var meta = document.querySelector("meta[property='" + property + "']");
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute('property', property);
+                document.getElementsByTagName('head')[0].appendChild(meta);
+            }
+            meta.content = content;
+        }
+
+        // Menjalankan fungsi SEO selepas tetingkap sedia
+        window.onload = function() {
+            // Mengemas kini deskripsi sedia ada kepada yang lebih dinamik
+            updateMetaTag("description", "Discover the finest local fruits in Malaysia with Tropika Harvest Berhad. Premium Durian, Manggis, and more fresh from our orchards.");
+            updateMetaTag("robots", "index, follow");
+
+            // Menambah tag Open Graph untuk paparan kemas apabila pautan dikongsi
+            setOgTag("og:title", "Tropika Harvest Berhad | Fresh Local Fruits");
+            setOgTag("og:description", "Experience the rich heritage and vibrant flavors of Malaysian tropical fruits.");
+            setOgTag("og:type", "website");
+        };
+        //]]>
+    </script>
+
+    <style type="text/css">
         .bottom-nav-container {
             text-align: center;
             margin: 40px 0 20px 0;
@@ -101,26 +142,26 @@
 
         <style type="text/css">
             .fruit-showcase-container {
-    		display: flex;
-    		flex-wrap: wrap;
-    		justify-content: center;
-    		padding: 30px 0;
-    		width: 100%;
-    		background-color: #fafafa;
-	    }
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 30px 0;
+                width: 100%;
+                background-color: #fafafa;
+            }
             .fruit-display-card {
-    		display: flex;
-    		flex-direction: column;
-    		width: 270px;
-    		margin: 18px;
-    		background-color: #ffffff;
-    		border: 1px solid #e0e0e0;
-    		border-radius: 12px; 
-    		box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    		overflow: hidden;
-    		text-align: left;
-    		transition: all 0.3s ease;
-	    }
+                display: flex;
+                flex-direction: column;
+                width: 270px;
+                margin: 18px;
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 12px; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+                overflow: hidden;
+                text-align: left;
+                transition: all 0.3s ease;
+            }
             .fruit-display-card:hover {
                 transform: translateY(-6px);
                 box-shadow: 0 10px 22px rgba(74, 20, 140, 0.15);
@@ -142,12 +183,12 @@
                 transform: scale(1.05);
             }
             .fruit-card-body {
-    		padding: 22px;
-    		text-align: center;
-    		display: flex;         
-    		flex-direction: column;
-    		flex-grow: 1;
-	    }
+                padding: 22px;
+                text-align: center;
+                display: flex;         
+                flex-direction: column;
+                flex-grow: 1;
+            }
             .fruit-card-title {
                 color: #4a148c; 
                 font-size: 19px;
@@ -156,29 +197,29 @@
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
             }
-	    #content-area .fruit-card-text {
-    		color: #555555;
-    		font-size: 13px;
-    		line-height: 1.6;
-    		margin: 0 0 20px 0;
-    		text-align: left;
-    		padding: 0 5px;
-    		flex-grow: 1;
-	    }
+            #content-area .fruit-card-text {
+                color: #555555;
+                font-size: 13px;
+                line-height: 1.6;
+                margin: 0 0 20px 0;
+                text-align: left;
+                padding: 0 5px;
+                flex-grow: 1;
+            }
             .fruit-card-btn {
-    		display: inline-block;
-    		background-color: #4a148c; 
-    		color: #ffffff;
-    		text-decoration: none;
-    		font-size: 13px;
-    		font-weight: bold;
-    		padding: 10px 24px;
-    		border-radius: 4px;
-    		border: 1px solid #4a148c;
-    		transition: all 0.3s ease;
-    		width: 70%;
-    		margin: 0 auto;
-	    }
+                display: inline-block;
+                background-color: #4a148c; 
+                color: #ffffff;
+                text-decoration: none;
+                font-size: 13px;
+                font-weight: bold;
+                padding: 10px 24px;
+                border-radius: 4px;
+                border: 1px solid #4a148c;
+                transition: all 0.3s ease;
+                width: 70%;
+                margin: 0 auto;
+            }
             .fruit-card-btn:hover {
                 background-color: #ffeb3b; 
                 color: #4a148c; 
