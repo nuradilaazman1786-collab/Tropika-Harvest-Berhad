@@ -101,6 +101,14 @@
         </div>
     </div>
 
+    <div id="search-section" style="text-align: center; margin: 30px auto; max-width: 600px; padding: 0 20px;">
+        <h3 style="color: #4a148c; font-family: Arial, sans-serif; margin-bottom: 10px;">Search Our Fruit Portfolio</h3>
+        <div style="display: flex; justify-content: center;">
+            <input type="text" id="fruit-search-input" placeholder="Type fruit name (e.g., Durian, Rambutan)..." style="width: 70%; padding: 12px; font-size: 14px; border: 2px solid #4a148c; border-right: none; border-radius: 25px 0 0 25px; outline: none;" onkeyup="filterFruits()" />
+            <button type="button" id="search-submit-btn" onclick="filterFruits()" style="width: 25%; background-color: #ffeb3b; color: #4a148c; border: 2px solid #4a148c; font-size: 14px; font-weight: bold; border-radius: 0 25px 25px 0; cursor: pointer; transition: all 0.3s ease;">Search</button>
+        </div>
+    </div>
+
     <div id="content-area">
         <h2>Welcome to Tropika Harvest</h2>
         <p style="text-align: center;">At Tropika Harvest Berhad, we are dedicated to providing the ultimate premium quality of local Malaysian fruits. From our hilly durian ridges to our lush mangosteen groves, our 500 acre sustainable plantation ensures that every fruit is packed with nutrition, flavor and love.</p>
@@ -209,6 +217,10 @@
                 background-color: #ffeb3b;
                 color: #4a148c;
                 border-color: #4a148c;
+            }
+            #search-submit-btn:hover {
+                background-color: #4a148c !important;
+                color: #ffeb3b !important;
             }
         </style>
 
@@ -351,6 +363,21 @@
         var timeLeft = 15;
         var gameInterval;
         var fruitFruits = ['🍋', '🍌', '🥭', '🍇', '🍉'];
+
+        // Live Search Function Logic
+        function filterFruits() {
+            var input = document.getElementById('fruit-search-input').value.toLowerCase();
+            var cards = document.getElementsByClassName('fruit-display-card');
+            
+            for (var i = 0; i < cards.length; i++) {
+                var title = cards[i].getElementsByClassName('fruit-card-title')[0].innerText.toLowerCase();
+                if (title.indexOf(input) > -1) {
+                    cards[i].style.display = 'flex';
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+        }
 
         function startGame() {
             score = 0;
