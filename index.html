@@ -54,6 +54,39 @@
         .portfolio-home-btn:hover .home-text {
             color: #4a148c; 
         }
+
+        /* === SEARCH BAR CUSTOM STYLING === */
+        .search-container-box {
+            text-align: center;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            max-width: 500px;
+            border: 1px solid #ddd;
+        }
+        .search-input-field {
+            width: 60%;
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid #4a148c;
+            border-radius: 4px;
+        }
+        .search-yellow-btn {
+            background-color: #ffeb3b;
+            color: #4a148c;
+            border: 2px solid #4a148c;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .search-yellow-btn:hover {
+            background-color: #4a148c;
+            color: #ffeb3b;
+        }
      </style>
 </head>
 <body>
@@ -101,12 +134,10 @@
         </div>
     </div>
 
-    <div id="search-section" style="text-align: center; margin: 30px auto; max-width: 600px; padding: 0 20px;">
-        <h3 style="color: #4a148c; font-family: Arial, sans-serif; margin-bottom: 10px;">Search Our Fruit Portfolio</h3>
-        <div style="display: flex; justify-content: center;">
-            <input type="text" id="fruit-search-input" placeholder="Type fruit name (e.g., Durian, Rambutan)..." style="width: 70%; padding: 12px; font-size: 14px; border: 2px solid #4a148c; border-right: none; border-radius: 25px 0 0 25px; outline: none;" onkeyup="filterFruits()" />
-            <button type="button" id="search-submit-btn" onclick="filterFruits()" style="width: 25%; background-color: #ffeb3b; color: #4a148c; border: 2px solid #4a148c; font-size: 14px; font-weight: bold; border-radius: 0 25px 25px 0; cursor: pointer; transition: all 0.3s ease;">Search</button>
-        </div>
+    <div class="search-container-box">
+        <h3 style="color: #4a148c; margin-bottom: 15px;">Search Our Fruits</h3>
+        <input type="text" id="mySearchInput" class="search-input-field" placeholder="Type fruit name..." />
+        <button type="button" class="search-yellow-btn" onclick="runFruitSearch()">Search</button>
     </div>
 
     <div id="content-area">
@@ -217,10 +248,6 @@
                 background-color: #ffeb3b;
                 color: #4a148c;
                 border-color: #4a148c;
-            }
-            #search-submit-btn:hover {
-                background-color: #4a148c !important;
-                color: #ffeb3b !important;
             }
         </style>
 
@@ -364,17 +391,18 @@
         var gameInterval;
         var fruitFruits = ['🍋', '🍌', '🥭', '🍇', '🍉'];
 
-        // Live Search Function Logic
-        function filterFruits() {
-            var input = document.getElementById('fruit-search-input').value.toLowerCase();
-            var cards = document.getElementsByClassName('fruit-display-card');
+        // === JAVASCRIPT JALANKAN CARIAN ===
+        function runFruitSearch() {
+            var inputData = document.getElementById('mySearchInput').value.toLowerCase();
+            var allCards = document.getElementsByClassName('fruit-display-card');
             
-            for (var i = 0; i < cards.length; i++) {
-                var title = cards[i].getElementsByClassName('fruit-card-title')[0].innerText.toLowerCase();
-                if (title.indexOf(input) > -1) {
-                    cards[i].style.display = 'flex';
+            for (var i = 0; i < allCards.length; i++) {
+                var fruitName = allCards[i].getElementsByClassName('fruit-card-title')[0].innerHTML.toLowerCase();
+                
+                if (fruitName.indexOf(inputData) > -1) {
+                    allCards[i].style.display = 'block'; // Papar jika padan
                 } else {
-                    cards[i].style.display = 'none';
+                    allCards[i].style.display = 'none';  // Sembunyi jika tidak padan
                 }
             }
         }
