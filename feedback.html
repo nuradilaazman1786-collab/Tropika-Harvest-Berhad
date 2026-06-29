@@ -95,18 +95,17 @@
 
         <div style="text-align: left; max-width: 700px; margin: 0 auto; background: #FFFDF0; padding: 30px; border-radius: 8px; border-left: 4px solid #4a148c; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
             
-            <!-- Ditambah autocomplete="off" untuk menghalang browser daripada memaparkan amaran autofill -->
-            <form id="feedbackForm" action="mailto:nuradilaazman1786@gmail.com" method="post" enctype="multipart/form-data" onsubmit="return validateForm();" autocomplete="off">
+            <form id="feedbackForm" action="mailto:nuradilaazman1786@gmail.com" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
                 
                 <div class="form-group">
                     <label for="fullname"><strong>Full Name</strong></label>
-                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="e.g. Ahmad Zaki Bin Rahman" style="width: 100%; padding: 10px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #ffffff;" autocomplete="off" />
+                    <input type="search" id="fullname" name="fullname" class="form-control" placeholder="e.g. Ahmad Zaki Bin Rahman" style="width: 100%; padding: 10px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #ffffff;" />
                     <span class="benefit-list" style="font-size: 12px; color: #666; font-style: italic; display: block;">Example: Enter your complete official registration name.</span>
                 </div>
 
                 <div class="form-group" style="margin-top: 15px;">
                     <label for="email"><strong>Email Address</strong></label>
-                    <input type="text" id="email" name="email" class="form-control" placeholder="e.g. name@company.com.my" style="width: 100%; padding: 10px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #ffffff;" autocomplete="off" />
+                    <input type="search" id="email" name="email" class="form-control" placeholder="e.g. name@company.com.my" style="width: 100%; padding: 10px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background-color: #ffffff;" />
                     <span class="benefit-list" style="font-size: 12px; color: #666; font-style: italic; display: block;">Example: institutional@procurement.my</span>
                 </div>
 
@@ -210,10 +209,10 @@
                 return false;
             }
 
-            // Jika semua pengesahan berjaya:
+            // Mesej berjaya
             alert("Success! Thank you for your feedback. Opening your mail client now.");
             
-            // Menggunakan setTimeout untuk mengosongkan borang (reset) 1 saat selepas aplikasi emel dibuka
+            // Mengosongkan semula borang (reset) 1 saat selepas submit ditekan
             setTimeout(function() {
                 document.getElementById("feedbackForm").reset();
             }, 1000);
