@@ -55,37 +55,78 @@
             color: #4a148c; 
         }
 
-        /* === SEARCH BAR CUSTOM STYLING === */
-        .search-container-box {
-            text-align: center;
+        /* === ADVANCED SEARCH ENGINE ENGINE CSS === */
+        .search-wrapper-wrapper {
+            max-width: 650px;
             margin: 40px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            max-width: 500px;
-            border: 1px solid #ddd;
+            padding: 0 20px;
+            font-family: Arial, sans-serif;
+        }
+        .search-engine-box {
+            display: flex;
+            background: #ffffff;
+            border: 2px solid #4a148c;
+            border-radius: 30px;
+            padding: 4px;
+            box-shadow: 0 4px 15px rgba(74, 20, 140, 0.1);
+            transition: all 0.3s ease;
+        }
+        .search-engine-box:focus-within {
+            box-shadow: 0 6px 20px rgba(74, 20, 140, 0.25);
+            transform: translateY(-2px);
         }
         .search-input-field {
-            width: 60%;
-            padding: 10px;
-            font-size: 14px;
-            border: 2px solid #4a148c;
-            border-radius: 4px;
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 12px 20px;
+            font-size: 15px;
+            color: #333333;
+            outline: none;
+            width: 100%;
         }
         .search-yellow-btn {
             background-color: #ffeb3b;
             color: #4a148c;
-            border: 2px solid #4a148c;
-            padding: 10px 20px;
+            border: none;
+            padding: 0 25px;
             font-size: 14px;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-left: 5px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .search-yellow-btn:hover {
             background-color: #4a148c;
             color: #ffeb3b;
+        }
+        .search-yellow-btn:active {
+            transform: scale(0.96);
+        }
+        
+        /* Advanced dynamic "Not Found" card container state */
+        #search-empty-state {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            background: #fdfdfd;
+            border: 1px dashed #ccc;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        #search-empty-state h4 {
+            color: #777777;
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+        #search-empty-state p {
+            color: #999999;
+            margin: 0;
+            font-size: 13px;
         }
      </style>
 </head>
@@ -134,10 +175,16 @@
         </div>
     </div>
 
-    <div class="search-container-box">
-        <h3 style="color: #4a148c; margin-bottom: 15px;">Search Our Fruits</h3>
-        <input type="text" id="mySearchInput" class="search-input-field" placeholder="Type fruit name..." />
-        <button type="button" class="search-yellow-btn" onclick="runFruitSearch()">Search</button>
+    <div class="search-wrapper-wrapper">
+        <div class="search-engine-box">
+            <input type="text" id="advancedSearchInput" class="search-input-field" placeholder="Search premium fruits (e.g. Mango, Durian...)" onkeyup="liveFruitSearch()" />
+            <button type="button" class="search-yellow-btn" onclick="liveFruitSearch()">Search</button>
+        </div>
+        
+        <div id="search-empty-state">
+            <h4>No Fruits Found 🔍</h4>
+            <p>We couldn't find matches for your search. Try looking up another tropical fruit alternative!</p>
+        </div>
     </div>
 
     <div id="content-area">
@@ -391,19 +438,30 @@
         var gameInterval;
         var fruitFruits = ['🍋', '🍌', '🥭', '🍇', '🍉'];
 
-        // === JAVASCRIPT JALANKAN CARIAN ===
-        function runFruitSearch() {
-            var inputData = document.getElementById('mySearchInput').value.toLowerCase();
-            var allCards = document.getElementsByClassName('fruit-display-card');
+        // === ADVANCED LIVE FILTERING JAVASCRIPT ===
+        function liveFruitSearch() {
+            var inputVal = document.getElementById('advancedSearchInput').value.toLowerCase().trim();
+            var cards = document.getElementsByClassName('fruit-display-card');
+            var matchedCounter = 0;
             
-            for (var i = 0; i < allCards.length; i++) {
-                var fruitName = allCards[i].getElementsByClassName('fruit-card-title')[0].innerHTML.toLowerCase();
+            for (var i = 0; i < cards.length; i++) {
+                var titleText = cards[i].getElementsByClassName('fruit-card-title')[0].textContent || cards[i].getElementsByClassName('fruit-card-title')[0].innerText;
+                titleText = titleText.toLowerCase();
                 
-                if (fruitName.indexOf(inputData) > -1) {
-                    allCards[i].style.display = 'block'; // Papar jika padan
+                if (titleText.indexOf(inputVal) > -1) {
+                    cards[i].style.display = 'flex'; // Reset display layout cleanly
+                    matchedCounter++;
                 } else {
-                    allCards[i].style.display = 'none';  // Sembunyi jika tidak padan
+                    cards[i].style.display = 'none'; // Fade out card natively
                 }
+            }
+            
+            // Handle visual display state when no conditions match search queries
+            var emptyMessage = document.getElementById('search-empty-state');
+            if (matchedCounter === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
             }
         }
 
